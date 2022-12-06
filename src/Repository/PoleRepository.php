@@ -39,6 +39,26 @@ class PoleRepository extends ServiceEntityRepository
         }
     }
 
+    public function add (Pole $pole){
+       $em = $this->getEntityManager();
+       $em->persist($pole);
+        $em->flush();
+    }
+
+
+     public function update (Pole $pole){
+        $em = $this->setEntityManager();
+        $em-> set($pole);
+        $em-> persist($pole);
+        $em-> flush();
+     }
+
+     
+
+
+
+
+
 //    /**
 //     * @return Pole[] Returns an array of Pole objects
 //     */

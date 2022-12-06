@@ -43,15 +43,15 @@ class Adherent
     #[ORM\Column(length: 255)]
     private ?string $MotDePasse = null;
 
-    #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: CategoryAdherent::class)]
-    private Collection $categoryAdherents;
-
-   
+    #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: CategorieAdherent::class)]
+    private Collection $categories;  
 
     public function __construct()
     {
         $this->idAdherent = new ArrayCollection();
         $this->categoryAdherents = new ArrayCollection();
+        $this->categorie = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,37 +168,32 @@ class Adherent
     }
 
     /**
-     * @return Collection<int, CategoryAdherent>
+     * @return Collection<int, CategorieAdherent>
      */
-    public function getCategoryAdherents(): Collection
+    public function getCategories(): Collection
     {
-        return $this->categoryAdherents;
+        return $this->categories;
     }
 
-    public function addCategoryAdherent(CategoryAdherent $categoryAdherent): self
+    public function addCategory(CategorieAdherent $category): self
     {
-        if (!$this->categoryAdherents->contains($categoryAdherent)) {
-            $this->categoryAdherents->add($categoryAdherent);
-            $categoryAdherent->setAdherent($this);
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setAdherent($this);
         }
 
         return $this;
     }
 
-    public function removeCategoryAdherent(CategoryAdherent $categoryAdherent): self
+    public function removeCategory(CategorieAdherent $category): self
     {
-        if ($this->categoryAdherents->removeElement($categoryAdherent)) {
+        if ($this->categories->removeElement($category)) {
             // set the owning side to null (unless already changed)
-            if ($categoryAdherent->getAdherent() === $this) {
-                $categoryAdherent->setAdherent(null);
+            if ($category->getAdherent() === $this) {
+                $category->setAdherent(null);
             }
         }
 
         return $this;
     }
-
-
-
-   
-
 }

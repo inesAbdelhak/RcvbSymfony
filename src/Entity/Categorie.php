@@ -36,14 +36,14 @@ class Categorie
     #[ORM\ManyToMany(targetEntity: Entrainement::class, mappedBy: 'categorie')]
     private Collection $entrainements;
 
-    #[ORM\ManyToOne(inversedBy: 'categorie')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?CategoryAdherent $categoryAdherent = null;
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: CategorieAdherent::class)]
+    private Collection $adherents;
 
     public function __construct()
     {
         $this->pole = new ArrayCollection();
         $this->entrainements = new ArrayCollection();
+        $this->adherents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,14 +162,32 @@ class Categorie
         return $this;
     }
 
-    public function getCategoryAdherent(): ?CategoryAdherent
+    /**
+     * @return Collection<int, CategorieAdherent>
+     */
+    public function getAdherents(): Collection
     {
-        return $this->categoryAdherent;
+        return $this->adherents;
     }
 
-    public function setCategoryAdherent(?CategoryAdherent $categoryAdherent): self
+    public function addAdherent(CategorieAdherent $adherent): self
     {
-        $this->categoryAdherent = $categoryAdherent;
+        if (!$this->adherents->contains($adherent)) {
+            $this->adherents->add($adherent);
+            $adherent->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdherent(CategorieAdherent $adherent): self
+    {
+        if ($this->adherents->removeElement($adherent)) {
+            // set the owning side to null (unless already changed)
+            if ($adherent->getCategorie() === $this) {
+                $adherent->setCategorie(null);
+            }
+        }
 
         return $this;
     }

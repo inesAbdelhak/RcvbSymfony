@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\CategoryAdherent;
+use App\Entity\CategorieAdherent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CategoryAdherent>
+ * @extends ServiceEntityRepository<CategorieAdherent>
  *
- * @method CategoryAdherent|null find($id, $lockMode = null, $lockVersion = null)
- * @method CategoryAdherent|null findOneBy(array $criteria, array $orderBy = null)
- * @method CategoryAdherent[]    findAll()
- * @method CategoryAdherent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CategorieAdherent|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CategorieAdherent|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CategorieAdherent[]    findAll()
+ * @method CategorieAdherent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CategoryAdherentRepository extends ServiceEntityRepository
+class CategorieAdherentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CategoryAdherent::class);
+        parent::__construct($registry, CategorieAdherent::class);
     }
 
-    public function save(CategoryAdherent $entity, bool $flush = false): void
+    public function save(CategorieAdherent $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CategoryAdherentRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(CategoryAdherent $entity, bool $flush = false): void
+    public function remove(CategorieAdherent $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class CategoryAdherentRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return CategoryAdherent[] Returns an array of CategoryAdherent objects
+//     * @return CategorieAdherent[] Returns an array of CategorieAdherent objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class CategoryAdherentRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?CategoryAdherent
+//    public function findOneBySomeField($value): ?CategorieAdherent
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
